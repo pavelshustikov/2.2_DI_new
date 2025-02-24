@@ -13,8 +13,6 @@ public class JavaConfig {
     @Configuration
     public class JavaConfig {
         @Bean
-        // аргумент метода и есть DI
-        // название метода - название бина
         public PostController postController(PostService service) {
             return new PostController(service);
         }
