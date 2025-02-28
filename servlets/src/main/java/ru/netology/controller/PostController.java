@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.Reader;
 
+
 public class PostController {
   public static final String APPLICATION_JSON = "application/json";
   private final PostService service;
@@ -24,7 +25,9 @@ public class PostController {
   }
 
   public void getById(long id, HttpServletResponse response) {
-    // TODO: deserialize request & serialize response
+    response.setContentType(APPLICATION_JSON);
+    final var post = service.getById(id);
+    response.getWriter().println(gson.toJson(post));
   }
 
   public void save(Reader body, HttpServletResponse response) throws IOException {
@@ -36,6 +39,8 @@ public class PostController {
   }
 
   public void removeById(long id, HttpServletResponse response) {
-    // TODO: deserialize request & serialize response
+    response.setContentType(APPLICATION_JSON);
+    service.removeById(id);
+    response.setStatus(HttpServletResponse.SC_OK);
   }
 }
